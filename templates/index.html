@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo3.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/131cc54e9a.js" crossorigin="anonymous"></script>
+    <title>Live Attendance System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #f9532d;
+            --primary-dark: #1F252E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #d3d3d3;
+            padding-top: 80px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: #fff;
+            box-shadow: 0 4px 17px rgba(0, 0, 0, .4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .recent-attendance th {
+            background-color: var(--primary-color);
+            color: white;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .recent-attendance th:hover {
+            background-color: #ff7043;
+            color: #fff;
+        }
+
+        .button .login, button {
+            width: 150px;
+            height: 45px;
+            background: transparent;
+            border: 2px solid #000;
+            outline: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #000;
+            font-weight: 500;
+            transition: .5s;
+        }
+
+        .button .login:hover, button:hover {
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex-direction: row;
+            gap: 40px;
+        }
+
+        .video-container {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            padding-left: 250px;
+        }
+
+        .video-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .9);
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding-right: 250px;
+            padding-top: 35px;
+        }
+
+        .recent-attendance {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .recent-attendance h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .recent-attendance table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recent-attendance th, .recent-attendance td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .recent-attendance th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .register {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 17px rgba(0, 0, 0, .2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .register h2 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        input[type="file"]::file-selector-button {
+            width: 150px;
+            height: 45px;
+            background: transparent;
+            border: 2px solid #000;
+            outline: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #000;
+            font-weight: 500;
+            transition: .5s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid white;
+           
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <h1><i class="fa-regular fa-images"></i>   Live Attendance System</h1>
+        <nav class="button">
+            <a href="#" class="button" onclick="stopCameraAndRedirect()">
+                <button class="login">Attendance File</button>
+            </a>
+        </nav>
+    </header>
+    
+    <section class="home">
+        <div class="video-container">
+            <h2>Live Camera Feed</h2>
+            <img src="{{ url_for('video_feed') }}" alt="Live Camera Feed">
+        </div>
+        
+        <div class="main">
+            <div class="recent-attendance">
+                <h2>Recent Attendance</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                    <tbody id="recent-attendance">
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="register">
+                <div class="images">
+                    <h2>Register New Face</h2>
+                    <form action="{{ url_for('upload_face') }}" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="name" placeholder="Enter Name" required>
+                        <input type="file" name="image" accept="image/*" required>
+                        <button type="submit">Upload & Train</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        function fetchRecentAttendance() {
+            fetch("http://127.0.0.1:5000/recent_attendance")
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById("recent-attendance");
+                    tbody.innerHTML = "";
+                    data.attendance.forEach(record => {
+                        const row = `<tr><td>${record.name}</td><td>${record.date}</td><td>${record.time}</td></tr>`;
+                        tbody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error("Error fetching attendance:", error));
+        }
+        setInterval(fetchRecentAttendance, 10000);
+        fetchRecentAttendance();
+
+        function stopCameraAndRedirect() {
+            fetch("http://127.0.0.1:5000/stop_camera")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.status);
+                    window.location.href = "{{ url_for('attendance') }}";
+                })
+                .catch(error => console.error("Error stopping camera:", error));
+        }
+    </script>
+</html>
