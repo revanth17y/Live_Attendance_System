@@ -1,6 +1,3 @@
-------PASTE YOUR IMAGES ON known_faces FOLDER----
-save file as .png or .jpeg or .jpg
-
 step1: python.exe -m pip install --upgrade pip
 
 step2: python -m venv env
@@ -16,6 +13,4 @@ step5: python train_faces.py
 step6: python app.py
 
 step7: http://127.0.0.1:5000/ in browser
-
-
 
