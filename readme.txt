@@ -1,9 +1,9 @@
-# Facial Recognition-Based Attendance System
+Facial Recognition-Based Attendance System
 
-## Overview
+Overview
 This is a Flask-powered attendance system that uses real-time facial recognition to track and record attendance. It captures faces from a live video feed, matches them with stored encodings, and logs attendance in an SQLite database. The system provides a web-based interface for viewing and exporting attendance records.
 
-## Features
+Features
 - Real-time face recognition for attendance tracking.
 - Stores attendance records in an SQLite database.
 - Web-based interface using Flask.
@@ -11,14 +11,14 @@ This is a Flask-powered attendance system that uses real-time facial recognition
 - Automatic CSV generation for attendance reports.
 - Remote accessibility if hosted on a server.
 
-## Requirements
+ Requirements
 Ensure you have Python installed, then install the required dependencies:
 
-```sh
+sh
 
 pip install -r requirements.txt
 
-```
+
 
 ### Dependencies
 - Flask
@@ -89,13 +89,13 @@ face_attendance_system/
 ```
 
 ## API Endpoints
-| Endpoint                | Method | Description |
-|-------------------------|--------|-------------|
+| Endpoint                | Method | Description                                    |
+|-------------------------|--------|------------------------------------------------|
 | `/`                     | GET    | Displays the main page with attendance records |
-| `/video_feed`           | GET    | Provides the live video feed |
-| `/get_attendance`       | GET    | Returns attendance records in JSON format |
-| `/add_face`             | POST   | Adds a new face to the database |
-| `/download_attendance`  | GET    | Downloads attendance records as a CSV file |
+| `/video_feed`           | GET    | Provides the live video feed                   |
+| `/get_attendance`       | GET    | Returns attendance records in JSON format      |
+| `/add_face`             | POST   | Adds a new face to the database                |
+| `/download_attendance`  | GET    | Downloads attendance records as a CSV file     |
 
 
 ## Author
